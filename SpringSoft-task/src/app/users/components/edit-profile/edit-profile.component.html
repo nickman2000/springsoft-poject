@@ -1,5 +1,7 @@
 <form [formGroup]="editUserForm">
-  <div class="form-container" [ngStyle]="{ filter: isSpinnerActivate ? 'blur(5px)' : 'none' }">
+  <div class="form-container"
+       [ngStyle]="{ filter: isSpinnerActivate ? 'blur(5px)' : 'none',
+        'pointer-events': isSpinnerActivate ? 'none' : 'auto' }">
     <div class="upload-container">
       <label>
         <div class="input-label">upload photo</div>
