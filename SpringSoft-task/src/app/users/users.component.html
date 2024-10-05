@@ -1,0 +1,8 @@
+@if (modalService.hasError() || modalService.isSuccess()) {
+  <app-modal></app-modal>
+}
+@defer {
+  <app-user-list></app-user-list>
+} @loading (minimum 0.3s) {
+  <span class="loader"></span>
+}

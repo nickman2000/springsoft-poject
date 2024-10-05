@@ -1,0 +1,4 @@
+<div @fadeIn class="modal" [ngClass]="{ 'error' : isError, 'success': !isError}">
+  <p>{{ modalText() }}</p>
+</div>
+<div class="backdrop"></div>
