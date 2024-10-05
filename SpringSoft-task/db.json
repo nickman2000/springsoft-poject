@@ -1,0 +1,95 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Ilia",
+      "surname": "Topuria",
+      "phoneNumber": 599123821,
+      "email": "ufcChamp1@example.com",
+      "photoUrl": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-02/TOPURIA_ILIA_L_BELT_02-17.png?itok=h1fu9Vu9"
+    },
+    {
+      "id": "2",
+      "name": "Merab",
+      "surname": "Dvalishvili",
+      "phoneNumber": 599123456,
+      "email": "ufcChamp2@example.com",
+      "photoUrl": "https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQm1pcQywbHEhL2Xe7s2m_2braAbhLJ1KUSXwArk-SU6Y1v48M3VMQZBF5lK5hgt9pMm3dR1nTcZv0G8jU"
+    },
+    {
+      "id": "3",
+      "name": "Wayne",
+      "surname": "Rooney",
+      "phoneNumber": 599123123,
+      "email": "redDevil@example.com",
+      "photoUrl": "https://static.independent.co.uk/2023/10/22/06/70a14f299b5d2bb85640b3a1d8c926d8Y29udGVudHNlYXJjaGFwaSwxNjk3OTcyNDI3-2.9324210.jpg?quality=75&width=1250&crop=3%3A2%2Csmart&auto=webp"
+    },
+    {
+      "id": "4",
+      "name": "Cristiano",
+      "surname": "Ronaldo",
+      "phoneNumber": 599456123,
+      "email": "cr7@example.com"
+    },
+    {
+      "id": "5",
+      "name": "Lionel",
+      "surname": "Messi",
+      "phoneNumber": 599321456,
+      "email": "leo10@example.com"
+    },
+    {
+      "id": "6",
+      "name": "Khabib",
+      "surname": "Nurmagomedov",
+      "phoneNumber": 599654321,
+      "email": "khabib@example.com"
+    },
+    {
+      "id": "7",
+      "name": "Conor",
+      "surname": "McGregor",
+      "phoneNumber": 599987654
+    },
+    {
+      "id": "8",
+      "name": "Kylian",
+      "surname": "Mbappe",
+      "phoneNumber": 599111222,
+      "email": "mbappe@example.com"
+    },
+    {
+      "id": "9",
+      "name": "Neymar",
+      "surname": "Junior",
+      "phoneNumber": 599333444
+    },
+    {
+      "id": "10",
+      "name": "Roger",
+      "surname": "Federer",
+      "phoneNumber": 599555666,
+      "email": "federer@example.com"
+    },
+    {
+      "id": "11",
+      "name": "LeBron",
+      "surname": "James",
+      "phoneNumber": 599777888
+    },
+    {
+      "id": "12",
+      "name": "Stephen",
+      "surname": "Curry",
+      "phoneNumber": 599888999,
+      "email": "sc30@example.com"
+    },
+    {
+      "id": "13",
+      "name": "Tom",
+      "surname": "Brady",
+      "phoneNumber": 599999111,
+      "email": "goat@example.com"
+    }
+  ]
+}
