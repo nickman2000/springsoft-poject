@@ -30,6 +30,9 @@ export class UserService {
 
   public editUser(user: IUser): Observable<IUser | null> {
     return this.http.put<IUser>(`${this.apiUrl}/users/${user.id}`, user).pipe(
+      tap(() => {
+        this.modalService.onSuccess('User profile successfully updated.')
+      }),
         catchError(() => {
           this.modalService.onError('Something went wrong.');
           return of(null);

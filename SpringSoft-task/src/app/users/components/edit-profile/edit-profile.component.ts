@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../core/user.service';
 import { IUser } from '../../core/user.model';
-import {delay, finalize, take} from 'rxjs';
+import { delay, finalize, take } from 'rxjs';
 import { ModalService } from '../../../modals/core/modal.service';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {NgStyle} from '@angular/common';
@@ -38,7 +38,7 @@ import {NgStyle} from '@angular/common';
 })
 
 
-export class EditProfileComponent implements OnInit{
+export class EditProfileComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
   private fb = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
@@ -150,9 +150,7 @@ export class EditProfileComponent implements OnInit{
         finalize(() => {
           this.isSpinnerActivate = false;
           this.router.navigate(['']);
-          if (this.modalService.hasError()) return;
-          this.modalService.onSuccess('User profile successfully updated.');
-        }),
+        })
       )
       .subscribe();
   }

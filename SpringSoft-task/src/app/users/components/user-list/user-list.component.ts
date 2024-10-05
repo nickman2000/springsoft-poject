@@ -2,7 +2,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     inject,
-    OnInit,
 } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
@@ -31,7 +30,7 @@ import { IUser } from "../../core/user.model";
     styleUrl: './user-list.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent {
     private router = inject(Router);
 
     public userService: UserService = inject(UserService);
@@ -41,9 +40,6 @@ export class UserListComponent implements OnInit {
         'email',
         'actions',
     ];
-
-    ngOnInit() {
-    }
 
     editClient(user: IUser) {
         this.router.navigate(['/edit-profile'], {
