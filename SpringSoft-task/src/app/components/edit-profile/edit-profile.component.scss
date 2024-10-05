@@ -1,0 +1,52 @@
+form {
+  height: 100%;
+  padding: 2rem;
+
+  .form-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1.5rem;
+
+    .upload-container {
+      grid-row: span 3;
+
+      label {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 0.5rem;
+
+        .input-label {
+          margin: auto;
+        }
+
+        .input-button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      .img-place {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: auto;
+      }
+    }
+    .user-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 16px;
+    }
+  }
+
+  .form-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+}

@@ -1,0 +1,88 @@
+<form [formGroup]="editUserForm">
+  <div class="form-container">
+    <div class="upload-container">
+      <label>
+        <div class="input-label">upload photo</div>
+        <div class="input-button">
+          <input id="photo-url" type="file" (change)="onFileChange($event)" accept="image/*"/>
+        </div>
+      </label>
+      <div class="img-place">
+        @if (url() || editUserForm.get("photoUrl")?.value) {
+          <img
+            class="img"
+            [src]="url() || editUserForm.get('photoUrl')?.value"
+            alt="Selected Image"
+            style="max-width: 200px"
+            height="200px"
+          />
+          <button mat-mini-fab (click)="removePhoto()">
+            <mat-icon>delete</mat-icon>
+          </button>
+        }
+      </div>
+    </div>
+    <div class="user-form">
+      <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input formControlName="firstName" matInput/>
+        @if (editUserForm.get("firstName")?.invalid &&
+        (editUserForm.get("firstName")?.touched || isSubmitted())) {
+          <mat-error>
+            @if (editUserForm.get("firstName")?.errors?.["required"]) {
+              <div>required field.</div>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input formControlName="lastName" matInput/>
+        @if (editUserForm.get("lastName")?.invalid &&
+        (editUserForm.get("lastName")?.touched || isSubmitted())) {
+          <mat-error>
+            @if (editUserForm.get("lastName")?.errors?.["required"]) {
+              <div>required field.</div>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          placeholder="pat@example.com"
+          formControlName="email"
+          required
+        />
+        @if (editUserForm.get("email")?.invalid &&
+        (editUserForm.get("email")?.touched || isSubmitted())) {
+          <mat-error>
+            @if (editUserForm.get("email")?.errors?.["required"]) {
+              <div>required field.</div>
+            }
+            @if (editUserForm.get("email")?.errors?.["email"]) {
+              <div>email is not valid.</div>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Phone Number</mat-label>
+        <input formControlName="phoneNumber" matInput/>
+        @if (editUserForm.get("phoneNumber")?.invalid &&
+        (editUserForm.get("phoneNumber")?.touched || isSubmitted())) {
+          <mat-error>
+            @if (editUserForm.get("phoneNumber")?.errors?.["pattern"]) {
+              <div>use only numbers.</div>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="form-buttons">
+      <button mat-flat-button (click)="userEdit()">Update</button>
+      <button mat-flat-button (click)="cancelEdit()" color="warn">Cancel</button>
+    </div>
+  </div>
+</form>
