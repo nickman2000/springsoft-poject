@@ -9,10 +9,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../core/user.service';
 import { IUser } from '../../core/user.model';
-import { delay, finalize, take } from 'rxjs';
+import { finalize, take } from 'rxjs';
 import { ModalService } from '../../../modals/core/modal.service';
-import {MatProgressSpinner} from '@angular/material/progress-spinner';
-import {NgStyle} from '@angular/common';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { NgStyle } from '@angular/common';
 
 
 @Component({
@@ -145,7 +145,6 @@ export class EditProfileComponent implements OnInit {
     this.userService
       .editUser(formValue)
       .pipe(
-        delay(500),
         take(1),
         finalize(() => {
           this.isSpinnerActivate = false;

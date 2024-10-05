@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {catchError, Observable, of, shareReplay, tap} from 'rxjs';
+import {catchError, delay, Observable, of, shareReplay, tap} from 'rxjs';
 import { IUser } from './user.model';
 import { ModalService } from '../../modals/core/modal.service';
 
@@ -30,6 +30,7 @@ export class UserService {
 
   public editUser(user: IUser): Observable<IUser | null> {
     return this.http.put<IUser>(`${this.apiUrl}/users/${user.id}`, user).pipe(
+      delay(500),
       tap(() => {
         this.modalService.onSuccess('User profile successfully updated.')
       }),
