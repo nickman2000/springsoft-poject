@@ -1,3 +1,9 @@
+how to run:
+1) Install Project Dependencies: run command "npm install"
+2) Build the Angular Project: run command "ng serve"
+3) Run JSON Server: run command  "json-server --watch db.json"
+
+how to test:
 1)
 Navigate to the Edit Profile Page: Open the /edit-profile route in the browser to view the form.
 Form Fields: Check if the following fields are present:
