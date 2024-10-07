@@ -40,14 +40,14 @@ import { NgStyle } from '@angular/common';
 
 export class EditProfileComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
-  private fb = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private userService = inject(UserService);
-  private editUser: IUser | null = null;
   private modalService = inject(ModalService);
 
+  public fb = inject(FormBuilder);
+  public editUser: IUser | null = null;
   public isSubmitted = signal<boolean>(false);
   public url = signal<string | null | undefined | ArrayBuffer>('');
   public formHasChanged: boolean = false;
@@ -60,7 +60,7 @@ export class EditProfileComponent implements OnInit {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    phoneNumber: ['', Validators.pattern('[0-9]*$')]
+    phoneNumber: [null, Validators.pattern('[0-9]*$')]
   })
 
   ngOnInit() {
