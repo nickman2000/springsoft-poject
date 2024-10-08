@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal
+} from '@angular/core';
 import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -9,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../core/user.service';
 import { IUser } from '../../core/user.model';
-import { finalize } from 'rxjs';
+import { finalize, tap } from 'rxjs';
 import { ModalService } from '../../../modals/core/modal.service';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { NgStyle } from '@angular/common';
@@ -39,21 +47,12 @@ import { NgStyle } from '@angular/common';
 
 
 export class EditProfileComponent implements OnInit {
-  private cdr = inject(ChangeDetectorRef);
-  private destroyRef = inject(DestroyRef);
-  private router = inject(Router);
-  private route = inject(ActivatedRoute);
-  private userService = inject(UserService);
-  private modalService = inject(ModalService);
-
   public fb = inject(FormBuilder);
   public editUser: IUser | null = null;
   public isSubmitted = signal<boolean>(false);
   public url = signal<string | null | undefined | ArrayBuffer>('');
   public formHasChanged: boolean = false;
   public isSpinnerActivate: boolean = false;
-
-
   public editUserForm: FormGroup = this.fb.group({
     id: [''],
     photoUrl: [''],
@@ -63,19 +62,30 @@ export class EditProfileComponent implements OnInit {
     phoneNumber: [null, Validators.pattern('[0-9]*$')]
   })
 
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private destroyRef: DestroyRef,
+    private router: Router,
+    public route: ActivatedRoute,
+    private userService: UserService,
+    private modalService: ModalService
+  ) {
+  }
+
   ngOnInit() {
-    this.route.queryParams
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((param) => {
+    this.route.queryParams.pipe(
+      takeUntilDestroyed(this.destroyRef),
+      tap(param => {
         this.fillFormValues(param['id']);
         return;
-      });
+      }),
+    ).subscribe();
 
     this.trackChangesInForm();
   }
 
   fillFormValues(id: number): void {
-    const [user] = this.userService?.users()?.filter((user) => user.id === id);
+    const user = this.userService?.users()?.find((user) => user.id === id);
     if (!user) {
       this.router.navigate(['']);
       this.modalService.onError('Something went wrong.');
@@ -87,16 +97,8 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
-  transformFormValues(): IUser {
-    const formValue = this.editUserForm.value;
-    return {
-      ...formValue,
-      phoneNumber: +formValue.phoneNumber,
-    };
-  }
-
   trackChangesInForm() {
-    this.editUserForm.valueChanges.subscribe((value) => {
+    this.editUserForm.valueChanges.subscribe(value => {
       value.phoneNumber = +value.phoneNumber;
       JSON.stringify(value) !== JSON.stringify(this.editUser) ?
         this.formHasChanged = true : this.formHasChanged = false;
@@ -105,6 +107,7 @@ export class EditProfileComponent implements OnInit {
 
   onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
+
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
       const reader = new FileReader();
@@ -140,17 +143,13 @@ export class EditProfileComponent implements OnInit {
   userEdit() {
     if (this.editUserForm.invalid) return;
     this.isSpinnerActivate = true;
-    const formValue = this.transformFormValues();
-
-    this.userService
-      .editUser(formValue)
-      .pipe(
-        finalize(() => {
-          this.isSpinnerActivate = false;
-          this.router.navigate(['']);
-        })
-      )
-      .subscribe();
+    const formValue = this.editUserForm.value;
+    this.userService.editUser(formValue).pipe(
+      finalize(() => {
+        this.isSpinnerActivate = false;
+        this.router.navigate(['']);
+      })
+    ).subscribe();
   }
 
   cancelEdit() {
